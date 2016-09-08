@@ -79,6 +79,7 @@ return CMap::mergeArray([
         'urlManager'    => [
             'urlFormat'      => 'path',
             'showScriptName' => false,
+            'appendParams'   => false,
             'rules'          => [
                 '<controller:\w+>/<id:\d+>'                        => '<controller>/view',
                 '<controller:\w+>/<action:\w+>/<id:\d+>'           => '<controller>/<action>',
