@@ -42,7 +42,7 @@
                     <a class="button adc" data-productid="<?php echo $this->model->id; ?>"
                        data-price="<?php echo $this->model->getPrice(); ?>"
                        href="javascript:;" onclick="basketObj.addToBasket($(this));">
-                        <?= in_array($this->model->id, $basketProducts) ? 'В корзине' : 'Добавить в корзину'; ?></a>
+                        <?= in_array($this->model->id, $basketProducts) ? 'В корзине!' : 'Добавить в корзину'; ?></a>
 
                     <div class="clearfix"></div>
             </div>

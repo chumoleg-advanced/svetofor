@@ -263,7 +263,7 @@ class Product extends MyActiveRecord
 
         $name = 'Добавить в корзину';
         if (in_array($this->id, $basketProducts)) {
-            $name = 'В корзине';
+            $name = 'В корзине!';
         }
 
         return CHtml::link('<i class="fa fa-shopping-cart"></i> ' . $name, 'javascript:;', [
