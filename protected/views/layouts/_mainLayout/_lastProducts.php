@@ -36,7 +36,7 @@ if (empty($lastProducts)) {
 
                     <a href="/product/view/<?php echo $product->id; ?>">
                         <section class="item-description">
-                            <span><?php echo $product->category->name; ?></span>
+                            <span><?php echo CHtml::value($product, 'category.name'); ?></span>
                             <h5><?php echo $product->name; ?></h5>
                         </section>
                     </a>

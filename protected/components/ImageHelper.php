@@ -30,7 +30,7 @@ class ImageHelper
         if (!file_exists($img)) {
             $img = str_replace('\\', '/', YiiBase::getPathOfAlias('webroot') . $img);
             if (!file_exists($img)) {
-                $img = '/images/shop_item_01';
+                $img = YiiBase::getPathOfAlias('webroot') . '/images/shop_item_01.jpg';
             }
         }
 
@@ -57,6 +57,7 @@ class ImageHelper
             $thumb->{$method}($width, $height);
             $thumb->save($thumbPath . $thumbName);
         }
+
 
         return str_replace(YiiBase::getPathOfAlias('webroot'), '', $thumbPath . $thumbName);
     }

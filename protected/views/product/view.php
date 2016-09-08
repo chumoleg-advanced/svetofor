@@ -84,7 +84,7 @@
 
                         <a href="/product/view/<?php echo $product->id; ?>">
                             <section>
-                                <span class="product-category"><?php echo $product->category->name; ?></span>
+                                <span class="product-category"><?php echo CHtml::value($product, 'category.name'); ?></span>
                                 <h5><?php echo $product->name; ?></h5>
                                 <span class="product-price"><?php echo $product->getPrice(); ?></span>
                             </section>
