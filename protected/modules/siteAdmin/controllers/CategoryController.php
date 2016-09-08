@@ -20,6 +20,11 @@ class CategoryController extends CrudController
         parent::actionIndex();
     }
 
+    public function actionDelete($id)
+    {
+        $this->redirect('index');
+    }
+
     protected function _savePost()
     {
        parent::_savePost(true);
