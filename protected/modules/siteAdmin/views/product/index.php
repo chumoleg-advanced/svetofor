@@ -1,0 +1,44 @@
+<a href="/siteAdmin/product/create" class="button color">Добавить новый товар</a>
+
+<?php
+FancyBox::activate();
+
+$this->widget(
+    'zii.widgets.grid.CGridView', array(
+        'id'           => 'product-grid',
+        'dataProvider' => $dataProvider,
+        'filter'       => $model,
+        'ajaxUpdate'   => false,
+
+        'columns'      => array(
+            'id',
+            array(
+                'name'        => 'picture',
+                'value'       => '$data->getPicture()',
+                'type'        => 'raw',
+                'htmlOptions' => array(
+                    'style' => 'text-align: center; padding: 5px;width:100px;'
+                )
+            ),
+            array(
+                'name'  => 'name',
+                'value' => 'CHtml::link($data->name, "/siteAdmin/product/update/" . $data->id)',
+                'type'  => 'raw'
+            ),
+            'article',
+            array(
+                'name'   => 'category_id',
+                'value'  => '!empty($data->category) ? $data->category->name : ""',
+                'filter' => Category::model()->getList()
+            ),
+            array(
+                'name'   => 'status',
+                'value'  => 'Product::getStatus($data->status)',
+                'filter' => Product::getStatus()
+            ),
+            array(
+                'class' => 'MyButtonColumn'
+            )
+        ),
+    )
+);
