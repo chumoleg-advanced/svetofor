@@ -12,3 +12,4 @@ protected/config/*local.php
 images/Product
 images/Category
 images/CarBrand
+.tmb
