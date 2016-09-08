@@ -5,41 +5,29 @@
 
 // This is the main Web application configuration. Any writable
 // CWebApplication properties can be configured here.
-return array(
+return CMap::mergeArray([
     'basePath'       => dirname(__FILE__) . DIRECTORY_SEPARATOR . '..',
     'name'           => 'Svetofor.ru',
-
-    // preloading 'log' component
-    'preload'        => array('log'),
-
+    'preload'        => ['log'],
     'sourceLanguage' => 'en',
     'language'       => 'ru',
-
-    // autoloading model and component classes
-    'import'         => array(
+    'import'         => [
         'application.models.*',
         'application.models.Form.*',
         'application.components.*',
         'application.extensions.chosen.*'
-    ),
-
-    'modules'        => array(
-        'siteAdmin' => array('defaultController' => 'order'),
-        'gii'       => array(
-            'class'     => 'system.gii.GiiModule',
-            'password'  => 'svetofor123',
-            'ipFilters' => array('127.0.0.1', '::1'),
-        ),
-    ),
-
+    ],
+    'modules'        => [
+        'siteAdmin' => ['defaultController' => 'order'],
+    ],
     // application components
-    'components'     => array(
-        'widgetFactory' => array(
-            'widgets' => array(
-                'CListView'      => array(
+    'components'     => [
+        'widgetFactory' => [
+            'widgets' => [
+                'CListView'      => [
                     'summaryText'   => '{start}&mdash;{end} из {count}',
                     'pagerCssClass' => 'pagination',
-                    'pager'         => array(
+                    'pager'         => [
                         'cssFile'              => false,
                         'selectedPageCssClass' => 'active',
                         'hiddenPageCssClass'   => 'disabled',
@@ -49,14 +37,14 @@ return array(
                         'nextPageLabel'        => '&gt;',
                         'lastPageLabel'        => '&gt;&gt;',
                         'maxButtonCount'       => '5',
-                    ),
+                    ],
                     'template'      => '{summary}{items}<div class="clearfix">&nbsp;</div>{pager}'
-                ),
-                'CGridView'      => array(
+                ],
+                'CGridView'      => [
                     'summaryText'   => 'Всего: {count}',
                     'pagerCssClass' => 'pagination',
                     'itemsCssClass' => 'cart-table responsive-table',
-                    'pager'         => array(
+                    'pager'         => [
                         'cssFile'              => false,
                         'selectedPageCssClass' => 'active',
                         'hiddenPageCssClass'   => 'disabled',
@@ -66,76 +54,58 @@ return array(
                         'nextPageLabel'        => '&gt;',
                         'lastPageLabel'        => '&gt;&gt;',
                         'maxButtonCount'       => '5',
-                    ),
-                    'template'      => '{summary}{items}<div class="clearfix">&nbsp;</div>{pager}'
-                ),
-                'CJuiDatePicker' => array(
+                    ],
+                    'template'      => '{pager}<div class="clearfix">&nbsp;</div>{summary}{items}<div class="clearfix">&nbsp;</div>{pager}'
+                ],
+                'CJuiDatePicker' => [
                     'language'    => 'ru',
-                    'options'     => array(
+                    'options'     => [
                         'changeMonth' => true,
                         'changeYear'  => true,
                         'dateFormat'  => 'yy-mm-dd',
                         'yearRange'   => '2012:' . date('Y')
-                    ),
-                    'htmlOptions' => array(
+                    ],
+                    'htmlOptions' => [
                         'size' => 15
-                    )
-                ),
-            ),
-        ),
-
-        'user'          => array(
+                    ]
+                ],
+            ],
+        ],
+        'user'          => [
             'allowAutoLogin' => true,
             'loginUrl'       => '/',
             'class'          => 'WebUser'
-        ),
-
-        'urlManager'    => array(
+        ],
+        'urlManager'    => [
             'urlFormat'      => 'path',
             'showScriptName' => false,
-            'rules'          => array(
+            'rules'          => [
                 '<controller:\w+>/<id:\d+>'                        => '<controller>/view',
                 '<controller:\w+>/<action:\w+>/<id:\d+>'           => '<controller>/<action>',
                 '<controller:\w+>/<action:\w+>'                    => '<controller>/<action>',
-
                 'siteAdmin/<controller:\w+>/<action:\w+>/<id:\d+>' => 'siteAdmin/<controller>/<action>',
-            ),
-        ),
-
-        'db'            => array(
-            'connectionString'   => 'mysql:host=localhost;dbname=svetofor',
+            ],
+        ],
+        'db'            => [
             'emulatePrepare'     => true,
-            'username'           => 'root',
-            'password'           => '',
             'charset'            => 'utf8',
             'enableProfiling'    => true,
             'enableParamLogging' => true,
-        ),
-
-        'errorHandler'  => array(
+        ],
+        'errorHandler'  => [
             'errorAction' => 'site/error',
-        ),
-        'log'           => array(
+        ],
+        'log'           => [
             'class'  => 'CLogRouter',
-            'routes' => array(
-                array(
+            'routes' => [
+                [
                     'class'  => 'CFileLogRoute',
                     'levels' => 'error, warning',
-                ),
-                // uncomment the following to show log messages on web pages
-                /*
-                array(
-                    'class'=>'CWebLogRoute',
-                ),
-                */
-            ),
-        ),
-    ),
-
-    // application-level parameters that can be accessed
-    // using Yii::app()->params['paramName']
-    'params'         => array(
-        // this is used in contact page
+                ],
+            ],
+        ],
+    ],
+    'params'         => [
         'adminEmail' => 'webmaster@example.com',
-    ),
-);
+    ],
+], require_once('main-local.php'));

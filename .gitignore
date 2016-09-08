@@ -7,4 +7,4 @@ protected/runtime/*
 protected/data/*.db
 themes/classic/views/
 
-# Created by .ignore support plugin (hsz.mobi)
+protected/config/main-local.php

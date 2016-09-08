@@ -1,0 +1,11 @@
+<?php
+
+return [
+    'components' => [
+        'db' => [
+            'connectionString' => 'mysql:host=localhost;dbname=svetofor54',
+            'username'         => 'root',
+            'password'         => 'Wv6YhpQfruEzsK'
+        ],
+    ],
+];
