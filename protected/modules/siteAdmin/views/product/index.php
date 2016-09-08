@@ -28,6 +28,11 @@ $this->widget(
                 'filter' => Category::model()->getList()
             ),
             array(
+                'name'   => 'producer_id',
+                'value'  => 'CHtml::value($data, "producer.name")',
+                'filter' => Producer::model()->getList()
+            ),
+            array(
                 'name'   => 'status',
                 'value'  => 'Product::getStatus($data->status)',
                 'filter' => Product::getStatus()
