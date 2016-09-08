@@ -1,5 +1,5 @@
 ### Yii template
-.idea
+/.idea
 assets/*
 !assets/.gitignore
 protected/runtime/*
