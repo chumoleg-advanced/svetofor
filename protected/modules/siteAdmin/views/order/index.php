@@ -31,6 +31,10 @@ $this->widget(
                 'value' => '$data->phone'
             ),
             'price',
+            [
+                'class'    => 'MyButtonColumn',
+                'template' => '{update}',
+            ]
         )
     )
 );

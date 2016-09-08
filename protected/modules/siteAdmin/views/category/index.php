@@ -30,9 +30,9 @@ $this->widget(
                 'filter' => MyActiveRecord::getStatus(),
                 'value'  => 'MyActiveRecord::getStatus($data->status)'
             ),
-            array(
-                'class' => 'MyButtonColumn'
-            )
+            [
+                'class'    => 'MyButtonColumn',
+            ]
         ),
     )
 );

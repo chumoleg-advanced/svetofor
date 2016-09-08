@@ -2,6 +2,6 @@
 
 class MyButtonColumn extends CButtonColumn
 {
-    public $template = '{delete}';
+    public $template = '{update} {delete}';
     public $htmlOptions = array('align' => 'center');
 }

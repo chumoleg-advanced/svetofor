@@ -36,9 +36,9 @@ $this->widget(
                 'value'  => 'Product::getStatus($data->status)',
                 'filter' => Product::getStatus()
             ),
-            array(
-                'class' => 'MyButtonColumn'
-            )
+            [
+                'class'    => 'MyButtonColumn',
+            ]
         ),
     )
 );
