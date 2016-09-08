@@ -39,7 +39,7 @@ class Product extends MyActiveRecord
             self::RECOMMENDED_YES => 'Да'
         );
 
-        return !empty($status) ? MyArray::get($array, $status) : $array;
+        return !empty($status) ? CHtml::value($array, $status) : $array;
     }
 
     /**

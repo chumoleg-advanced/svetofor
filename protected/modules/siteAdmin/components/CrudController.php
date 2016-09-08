@@ -129,8 +129,8 @@ class CrudController extends CController
 
     protected function _savePicture()
     {
-        $image = MyArray::get($_FILES, $this->modelName . '_picture');
-        $fileSize = MyArray::get($image, 'size');
+        $image = CHtml::value($_FILES, $this->modelName . '_picture');
+        $fileSize = CHtml::value($image, 'size');
         if (!empty($fileSize)) {
             $uploadDir = 'images/' . $this->modelName . '/' . $this->model->id;
             if (!is_dir($uploadDir)) {

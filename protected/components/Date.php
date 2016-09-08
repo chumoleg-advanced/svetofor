@@ -26,7 +26,7 @@ class Date
         );
 
         if (!empty($month)) {
-            return MyArray::get($array, $month);
+            return CHtml::value($array, $month);
         }
 
         return $array;

@@ -116,8 +116,6 @@ class YiiMailMessage extends CComponent
 	 */
 	public function __construct($subject = null, $body = null, $contentType = null, $charset = null)
 	{
-        $this->from = MyArray::get(Yii::app()->params, 'warehouseEmail', 'warehouse@worest.ru');
-
 		Yii::app()->mail->registerScripts();
 		$this->message = Swift_Message::newInstance($subject, $body, $contentType, $charset);
 	}

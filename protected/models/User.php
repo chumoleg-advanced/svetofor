@@ -44,7 +44,7 @@ class User extends MyActiveRecord
             self::STATUS_BANNED   => 'Заблокирован'
         );
 
-        return !empty($status) ? MyArray::get($array, $status) : $array;
+        return !empty($status) ? CHtml::value($array, $status) : $array;
     }
 
     public function getRoles($role = null)
@@ -54,7 +54,7 @@ class User extends MyActiveRecord
             self::WHOLESALE => 'Покупатель'
         );
 
-        return !empty($role) ? MyArray::get($array, $role) : $array;
+        return !empty($role) ? CHtml::value($array, $role) : $array;
     }
 
     /**

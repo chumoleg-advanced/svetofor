@@ -22,7 +22,7 @@ class UserController extends CController
     {
         $data = Yii::app()->request->getRestParams();
         $form = new LoginForm();
-        $form->attributes = MyArray::get($data, 'LoginForm');
+        $form->attributes = CHtml::value($data, 'LoginForm');
         if (!$form->validate()) {
             $error = current($form->getErrors());
             MyJson::answerError($error[0]);

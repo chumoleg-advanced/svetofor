@@ -27,8 +27,8 @@ class SettingsController extends CrudController
     protected function _savePicture()
     {
         $folderName = MyArray::getPost('folderName');
-        $file = MyArray::get($_FILES, 'file');
-        $fileSize = MyArray::get($file, 'size');
+        $file = CHtml::value($_FILES, 'file');
+        $fileSize = CHtml::value($file, 'size');
         if (!empty($fileSize)) {
             $uploadDir = Yii::app()->basePath . '/data/' . $folderName . '/';
             if (!is_dir($uploadDir)) {

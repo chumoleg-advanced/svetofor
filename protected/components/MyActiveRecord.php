@@ -79,7 +79,7 @@ class MyActiveRecord extends CActiveRecord
             self::STATUS_NO_ACTIVE => 'Не активный'
         );
 
-        return !empty($status) ? MyArray::get($array, $status) : $array;
+        return !empty($status) ? CHtml::value($array, $status) : $array;
     }
 
     protected function _getDataProvider($criteria, $pageSize = 25)

@@ -68,14 +68,14 @@ class BasketController extends Controller
 
     public function actionCreate()
     {
-        $data = MyArray::get($_POST, 'Order');
+        $data = CHtml::value($_POST, 'Order');
         if (!Yii::app()->request->isPostRequest || empty($data)) {
             $this->redirect('/basket/index');
         }
 
         $model = new Order('validateCaptcha');
         $model->attributes = $data;
-        $model->verifyCode = MyArray::get($_POST, 'verifyCode');
+        $model->verifyCode = CHtml::value($_POST, 'verifyCode');
         if ($model->save()) {
             $this->redirect('/basket/final');
         }

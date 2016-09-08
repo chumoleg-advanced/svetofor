@@ -51,7 +51,7 @@ class Order extends MyActiveRecord
             self::STATUS_RETURN    => 'Возврат'
         );
 
-        return !empty($status) ? MyArray::get($array, $status) : $array;
+        return !empty($status) ? CHtml::value($array, $status) : $array;
     }
 
     /**

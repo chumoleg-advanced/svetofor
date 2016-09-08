@@ -39,10 +39,10 @@ class ProductController extends Controller
         $model->unsetAttributes();
         if (isset($_GET['Product'])) {
             $model->attributes = $_GET['Product'];
-            $model->subCategoryId = MyArray::get($_GET['Product'], 'subCategoryId');
+            $model->subCategoryId = CHtml::value($_GET['Product'], 'subCategoryId');
 
             if (!empty($model->category_id)) {
-                $categoryName = $model->category->name;
+                $categoryName = CHtml::value($model, 'category.name');
             }
         }
 

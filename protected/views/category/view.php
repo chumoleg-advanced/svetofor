@@ -11,9 +11,9 @@
 
             <ul id="categories">
                 <?php
-                $selectedSubCategory = MyArray::get($_GET, 'subCategory');
+                $selectedSubCategory = CHtml::value($_GET, 'subCategory');
                 if (empty($selectedSubCategory) && isset($_GET['Product'])) {
-                    $selectedSubCategory = MyArray::get($_GET['Product'], 'subCategoryId');
+                    $selectedSubCategory = CHtml::value($_GET['Product'], 'subCategoryId');
                 }
                 ?>
 

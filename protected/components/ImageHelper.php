@@ -44,7 +44,7 @@ class ImageHelper
 
         $pathInfo = pathinfo($img);
         $thumbName = "thumb_" . $pathInfo['filename'] . '_' . $method . '_' . $width . '_' . $height . '.'
-            . $pathInfo['extension'];
+            . CHtml::value($pathInfo, 'extension');
         $thumbPath = $pathInfo['dirname'] . '/' . self::THUMB_DIR . '/';
         if (!file_exists($thumbPath)) {
             mkdir($thumbPath);
