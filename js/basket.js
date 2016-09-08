@@ -8,7 +8,7 @@ var basketObj = {
 
         $.post('/basket/addProduct', {productId: productId, price: price}, function (data) {
             updateCounter(data);
-            obj.text('Добавлен!');
+            obj.text('В корзине!');
         }, 'json');
     },
     deleteFromBasket: function (obj) {
