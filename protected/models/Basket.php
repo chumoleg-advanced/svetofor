@@ -4,14 +4,15 @@
  * This is the model class for table "basket".
  *
  * The followings are the available columns in table 'basket':
- * @property string $id
- * @property string $user_session
- * @property int $user_id
- * @property string $date_create
- * @property int $product_id
- * @property float $price
- * @property float $single_price
- * @property int $quantity
+ *
+ * @property string  $id
+ * @property string  $user_session
+ * @property int     $user_id
+ * @property string  $date_create
+ * @property int     $product_id
+ * @property float   $price
+ * @property float   $single_price
+ * @property int     $quantity
  *
  * The followings are the available model relations:
  * @property Product $product
@@ -33,16 +34,19 @@ class Basket extends MyActiveRecord
     {
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
-        return array(
-            array('user_id, product_id, quantity', 'numerical', 'integerOnly' => true),
-            array('user_session, product_id, quantity', 'length', 'max' => 10),
-            array('price, single_price', 'length', 'max' => 12),
-            array('date_create', 'safe'),
+        return [
+            ['user_id, product_id, quantity', 'numerical', 'integerOnly' => true],
+            ['user_session, product_id, quantity', 'length', 'max' => 10],
+            ['price, single_price', 'length', 'max' => 12],
+            ['date_create', 'safe'],
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
-            array('id, user_session, date_create, product_id, price, quantity, user_id, single_price',
-                'safe', 'on' => 'search'),
-        );
+            [
+                'id, user_session, date_create, product_id, price, quantity, user_id, single_price',
+                'safe',
+                'on' => 'search'
+            ],
+        ];
     }
 
     /**
@@ -52,10 +56,10 @@ class Basket extends MyActiveRecord
     {
         // NOTE: you may need to adjust the relation name and the related
         // class name for the relations automatically generated below.
-        return array(
-            'product' => array(self::BELONGS_TO, 'Product', 'product_id'),
-            'user'    => array(self::BELONGS_TO, 'User', 'user_id'),
-        );
+        return [
+            'product' => [self::BELONGS_TO, 'Product', 'product_id'],
+            'user'    => [self::BELONGS_TO, 'User', 'user_id'],
+        ];
     }
 
     /**
@@ -63,7 +67,7 @@ class Basket extends MyActiveRecord
      */
     public function attributeLabels()
     {
-        return array(
+        return [
             'id'           => 'ID',
             'user_session' => 'Сессия',
             'user_id'      => 'Пользователь',
@@ -72,7 +76,7 @@ class Basket extends MyActiveRecord
             'price'        => 'Сумма',
             'single_price' => 'Цена',
             'quantity'     => 'Кол-во',
-        );
+        ];
     }
 
     /**
@@ -101,15 +105,17 @@ class Basket extends MyActiveRecord
         $criteria->compare('price', $this->price, true);
         $criteria->compare('quantity', $this->quantity);
 
-        return new CActiveDataProvider($this, array(
+        return new CActiveDataProvider($this, [
             'criteria' => $criteria,
-        ));
+        ]);
     }
 
     /**
      * Returns the static model of the specified AR class.
      * Please note that you should have this exact method in all your CActiveRecord descendants!
+     *
      * @param string $className active record class name.
+     *
      * @return Basket the static model class
      */
     public static function model($className = __CLASS__)
@@ -160,7 +166,7 @@ class Basket extends MyActiveRecord
     public function getMyBasket()
     {
         $criteria = new CDbCriteria();
-        $criteria->with = array('product' => array('select' => 'name'));
+        $criteria->with = ['product' => ['select' => 'name']];
 
         $userId = Yii::app()->user->id;
         if (!empty($userId)) {
@@ -170,6 +176,11 @@ class Basket extends MyActiveRecord
         }
 
         return $this->findAll($criteria);
+    }
+
+    public function getMyBasketProducts()
+    {
+        return CHtml::listData($this->getMyBasket(), 'product_id', 'product_id');
     }
 
     public function getSumAndCount()
@@ -182,6 +193,6 @@ class Basket extends MyActiveRecord
             $sum += $bask->price;
         }
 
-        return array($count, $sum);
+        return [$count, $sum];
     }
 }

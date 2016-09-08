@@ -37,11 +37,12 @@
                 <div class="clearfix"></div>
             </section>
 
+            <?php $basketProducts = Basket::model()->getMyBasketProducts(); ?>
             <div class="text-align-right margin-top-20">
                     <a class="button adc" data-productid="<?php echo $this->model->id; ?>"
                        data-price="<?php echo $this->model->getPrice(); ?>"
                        href="javascript:;" onclick="basketObj.addToBasket($(this));">
-                        Добавить в корзину</a>
+                        <?= in_array($this->model->id, $basketProducts) ? 'В корзине' : 'Добавить в корзину'; ?></a>
 
                     <div class="clearfix"></div>
             </div>

@@ -4,25 +4,26 @@
  * This is the model class for table "product".
  *
  * The followings are the available columns in table 'product':
- * @property integer $id
- * @property string $name
- * @property string $description
- * @property string $article
- * @property integer $status
- * @property string $picture
- * @property integer $category_id
- * @property integer $producer_id
- * @property float $opt_price
- * @property float $rozn_price
- * @property string $date_create
- * @property integer $recommended
+ *
+ * @property integer                 $id
+ * @property string                  $name
+ * @property string                  $description
+ * @property string                  $article
+ * @property integer                 $status
+ * @property string                  $picture
+ * @property integer                 $category_id
+ * @property integer                 $producer_id
+ * @property float                   $opt_price
+ * @property float                   $rozn_price
+ * @property string                  $date_create
+ * @property integer                 $recommended
  *
  * The followings are the available model relations:
- * @property Basket[] $baskets
- * @property Category $category
- * @property RelOrderProduct[] $relOrderProducts
+ * @property Basket[]                $baskets
+ * @property Category                $category
+ * @property RelOrderProduct[]       $relOrderProducts
  * @property RelProductSubcategory[] $relProductSubcategories
- * @property Producer $producer
+ * @property Producer                $producer
  */
 class Product extends MyActiveRecord
 {
@@ -34,10 +35,10 @@ class Product extends MyActiveRecord
 
     public static function getRecommended($status = null)
     {
-        $array = array(
+        $array = [
             self::RECOMMENDED_NO  => 'Нет',
             self::RECOMMENDED_YES => 'Да'
-        );
+        ];
 
         return !empty($status) ? CHtml::value($array, $status) : $array;
     }
@@ -57,20 +58,23 @@ class Product extends MyActiveRecord
     {
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
-        return array(
-            array('name, article, category_id, rozn_price, opt_price', 'required'),
-            array('status, recommended, category_id, producer_id', 'numerical', 'integerOnly' => true),
-            array('rozn_price, opt_price', 'numerical', 'min' => 0),
-            array('name, article', 'length', 'max' => 255),
-            array('picture, description', 'length', 'max' => 500),
-            array('category_id', 'length', 'max' => 4),
-            array('description, date_create', 'safe'),
+        return [
+            ['name, article, category_id, rozn_price, opt_price', 'required'],
+            ['status, recommended, category_id, producer_id', 'numerical', 'integerOnly' => true],
+            ['rozn_price, opt_price', 'numerical', 'min' => 0],
+            ['name, article', 'length', 'max' => 255],
+            ['picture, description', 'length', 'max' => 500],
+            ['category_id', 'length', 'max' => 4],
+            ['description, date_create', 'safe'],
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
-            array('id, name, description, article, status, picture, category_id,
+            [
+                'id, name, description, article, status, picture, category_id,
                 date_create, recommended, subCategories, producer_id, rozn_price, opt_price, subCategoryId',
-                'safe', 'on' => 'search'),
-        );
+                'safe',
+                'on' => 'search'
+            ],
+        ];
     }
 
     /**
@@ -80,13 +84,13 @@ class Product extends MyActiveRecord
     {
         // NOTE: you may need to adjust the relation name and the related
         // class name for the relations automatically generated below.
-        return array(
-            'baskets'                 => array(self::HAS_MANY, 'Basket', 'product_id'),
-            'category'                => array(self::BELONGS_TO, 'Category', 'category_id'),
-            'relOrderProducts'        => array(self::HAS_MANY, 'RelOrderProduct', 'product_id'),
-            'relProductSubcategories' => array(self::HAS_MANY, 'RelProductSubcategory', 'product_id'),
-            'producer'                => array(self::BELONGS_TO, 'Producer', 'producer_id'),
-        );
+        return [
+            'baskets'                 => [self::HAS_MANY, 'Basket', 'product_id'],
+            'category'                => [self::BELONGS_TO, 'Category', 'category_id'],
+            'relOrderProducts'        => [self::HAS_MANY, 'RelOrderProduct', 'product_id'],
+            'relProductSubcategories' => [self::HAS_MANY, 'RelProductSubcategory', 'product_id'],
+            'producer'                => [self::BELONGS_TO, 'Producer', 'producer_id'],
+        ];
     }
 
     /**
@@ -94,7 +98,7 @@ class Product extends MyActiveRecord
      */
     public function attributeLabels()
     {
-        return array(
+        return [
             'id'            => 'ID',
             'name'          => 'Название',
             'description'   => 'Описание',
@@ -108,7 +112,7 @@ class Product extends MyActiveRecord
             'producer_id'   => 'Производитель',
             'opt_price'     => 'Оптовая цена',
             'rozn_price'    => 'Розничная цена',
-        );
+        ];
     }
 
     /**
@@ -126,8 +130,8 @@ class Product extends MyActiveRecord
     public function search()
     {
         $criteria = new CDbCriteria;
-        $criteria->with = array('category');
-        if (!empty($this->subCategoryId)){
+        $criteria->with = ['category'];
+        if (!empty($this->subCategoryId)) {
             $criteria->with[] = 'relProductSubcategories';
             $criteria->together = true;
             $criteria->compare('relProductSubcategories.sub_category_id', $this->subCategoryId);
@@ -148,7 +152,9 @@ class Product extends MyActiveRecord
     /**
      * Returns the static model of the specified AR class.
      * Please note that you should have this exact method in all your CActiveRecord descendants!
+     *
      * @param string $className active record class name.
+     *
      * @return Product the static model class
      */
     public static function model($className = __CLASS__)
@@ -168,6 +174,7 @@ class Product extends MyActiveRecord
     protected function afterSave()
     {
         $this->addRelSubCategories();
+
         return parent::afterSave();
     }
 
@@ -190,8 +197,9 @@ class Product extends MyActiveRecord
     {
         $criteria = new CDbCriteria();
         $criteria->limit = 9;
-        $criteria->with = array('category');
+        $criteria->with = ['category'];
         $criteria->order = 't.id DESC';
+
         return $this->findAll($criteria);
     }
 
@@ -199,9 +207,10 @@ class Product extends MyActiveRecord
     {
         $criteria = new CDbCriteria();
         $criteria->limit = 12;
-        $criteria->with = array('category');
+        $criteria->with = ['category'];
         $criteria->order = 't.id DESC';
         $criteria->compare('t.recommended', self::RECOMMENDED_YES);
+
         return $this->findAll($criteria);
     }
 
@@ -209,27 +218,30 @@ class Product extends MyActiveRecord
     {
         $criteria = new CDbCriteria();
         $criteria->compare('t.category_id', $categoryId);
+
         return $this->_getDataProvider($criteria, 25);
     }
 
     public function getAllBySubCategory($subCategoryId)
     {
         $criteria = new CDbCriteria();
-        $criteria->with = array('relProductSubcategories');
+        $criteria->with = ['relProductSubcategories'];
         $criteria->together = true;
         $criteria->compare('relProductSubcategories.sub_category_id', $subCategoryId);
+
         return $this->_getDataProvider($criteria);
     }
 
     /**
      * @param Product $productObj
+     *
      * @return $this[]
      */
     public function getRelatedProducts($productObj)
     {
         $criteria = new CDbCriteria();
         $criteria->limit = 4;
-        $criteria->with = array('category');
+        $criteria->with = ['category'];
         $criteria->addCondition('t.id != ' . $productObj->id);
         $criteria->compare('t.category_id', $productObj->category_id);
 
@@ -247,22 +259,36 @@ class Product extends MyActiveRecord
 
     public function getLinkBasket()
     {
-        return CHtml::link('<i class="fa fa-shopping-cart"></i> Добавить в корзину', 'javascript:;', array(
+        $basketProducts = Basket::model()->getMyBasketProducts();
+
+        $name = 'Добавить в корзину';
+        if (in_array($this->id, $basketProducts)) {
+            $name = 'В корзине';
+        }
+
+        return CHtml::link('<i class="fa fa-shopping-cart"></i> ' . $name, 'javascript:;', [
             'class'          => 'product-button',
             'data-productid' => $this->id,
             'data-price'     => $this->getPrice(),
             'onclick'        => 'basketObj.addToBasket($(this));'
-        ));
+        ]);
     }
 
     public function getLinkAddBasket()
     {
-        return CHtml::link('<i class="fa fa-shopping-cart"></i>', 'javascript:;', array(
+        $basketProducts = Basket::model()->getMyBasketProducts();
+
+        $name = '<i class="fa fa-shopping-cart"></i>';
+        if (in_array($this->id, $basketProducts)) {
+            $name = 'Добавлен!';
+        }
+
+        return CHtml::link($name, 'javascript:;', [
             'class'          => 'button color',
             'data-productid' => $this->id,
             'data-price'     => $this->getPrice(),
             'onclick'        => 'basketObj.addToBasket($(this));'
-        ));
+        ]);
     }
 
     public function getPictureLink()
@@ -273,9 +299,10 @@ class Product extends MyActiveRecord
         }
 
         $imageSmall = CHtml::image(Yii::app()->request->baseUrl .
-            ImageHelper::thumb(68, 68, $href, array('method' => 'adaptiveResize')));
+            ImageHelper::thumb(68, 68, $href, ['method' => 'adaptiveResize']));
 
         $link = '/product/view/' . $this->id;
+
         return CHtml::link($imageSmall, $link);
     }
 }
