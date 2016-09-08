@@ -12,7 +12,7 @@ class Controller extends CController
      */
     public $layout = '//layouts/main';
 
-    public $showMainSlider = true;
+    public $showMainSlider = false;
     public $showCategories = true;
     public $showLastProducts = true;
     public $showRecommendedProducts = true;
