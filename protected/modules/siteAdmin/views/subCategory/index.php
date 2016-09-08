@@ -22,7 +22,7 @@ $this->widget(
             ),
             array(
                 'name'   => 'category_id',
-                'value'  => '!empty($data->category) ? $data->category->name : ""',
+                'value'  => 'CHtml::value($data, "category.name")',
                 'filter' => Category::model()->getList()
             ),
             array(
