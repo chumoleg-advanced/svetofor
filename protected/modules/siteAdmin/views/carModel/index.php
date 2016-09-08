@@ -2,22 +2,17 @@
 
 <?php
 $this->widget(
-    'zii.widgets.grid.CGridView', array(
+    'zii.widgets.grid.CGridView', [
         'id'           => 'car-model-grid',
         'dataProvider' => $dataProvider,
         'filter'       => $model,
         'ajaxUpdate'   => false,
-
-        'columns'      => array(
+        'columns'      => [
             'id',
-            array(
-                'name'  => 'name',
-                'value' => 'CHtml::link($data->name, "/siteAdmin/carModel/update/" . $data->id)',
-                'type'  => 'raw'
-            ),
-            array(
+            'name',
+            [
                 'class' => 'MyButtonColumn'
-            )
-        ),
-    )
+            ]
+        ],
+    ]
 );

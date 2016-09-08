@@ -2,32 +2,28 @@
 
 <?php
 $this->widget(
-    'zii.widgets.grid.CGridView', array(
+    'zii.widgets.grid.CGridView', [
         'id'           => 'sub-category-grid',
         'dataProvider' => $dataProvider,
         'filter'       => $model,
         'ajaxUpdate'   => false,
-
-        'columns'      => array(
+        'columns'      => [
             'id',
-            array(
-                'name'  => 'name',
-                'value' => 'CHtml::link($data->name, "/siteAdmin/subCategory/update/" . $data->id)',
-                'type'  => 'raw'
-            ),
-            array(
+            'name',
+            [
                 'name'   => 'status',
                 'filter' => MyActiveRecord::getStatus(),
                 'value'  => 'MyActiveRecord::getStatus($data->status)'
-            ),
-            array(
+            ],
+            [
                 'name'   => 'category_id',
                 'value'  => 'CHtml::value($data, "category.name")',
                 'filter' => Category::model()->getList()
-            ),
-            array(
-                'class' => 'MyButtonColumn'
-            )
-        ),
-    )
+            ],
+            [
+                'class'    => 'MyButtonColumn',
+                'template' => '{update}',
+            ]
+        ],
+    ]
 );

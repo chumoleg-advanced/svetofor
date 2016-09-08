@@ -10,11 +10,7 @@ $this->widget(
 
         'columns'      => array(
             'id',
-            array(
-                'name'  => 'name',
-                'value' => 'CHtml::link($data->name, "/siteAdmin/producer/update/" . $data->id)',
-                'type'  => 'raw'
-            ),
+            'name',
             array(
                 'name'   => 'category_id',
                 'value'  => 'CHtml::value($data, "category.name")',

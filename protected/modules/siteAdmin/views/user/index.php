@@ -7,11 +7,7 @@ $this->widget(
         'ajaxUpdate'   => false,
         'columns'      => [
             'id',
-            [
-                'name'  => 'email',
-                'value' => 'CHtml::link($data->email, "/siteAdmin/user/update/" . $data->id)',
-                'type'  => 'raw'
-            ],
+            'email',
             'fio',
             'phone',
             [

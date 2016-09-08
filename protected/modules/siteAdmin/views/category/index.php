@@ -4,35 +4,31 @@
 FancyBox::activate();
 
 $this->widget(
-    'zii.widgets.grid.CGridView', array(
+    'zii.widgets.grid.CGridView', [
         'id'           => 'category-grid',
         'dataProvider' => $dataProvider,
         'filter'       => $model,
         'ajaxUpdate'   => false,
-
-        'columns'      => array(
+        'columns'      => [
             'id',
-            array(
+            [
                 'name'        => 'picture',
                 'value'       => '$data->getPicture()',
                 'type'        => 'raw',
-                'htmlOptions' => array(
+                'htmlOptions' => [
                     'style' => 'text-align: center; padding: 5px;width:100px;'
-                )
-            ),
-            array(
-                'name'  => 'name',
-                'value' => 'CHtml::link($data->name, "/siteAdmin/category/update/" . $data->id)',
-                'type'  => 'raw'
-            ),
-            array(
+                ]
+            ],
+            'name',
+            [
                 'name'   => 'status',
                 'filter' => MyActiveRecord::getStatus(),
                 'value'  => 'MyActiveRecord::getStatus($data->status)'
-            ),
+            ],
             [
                 'class'    => 'MyButtonColumn',
+                'template' => '{update}',
             ]
-        ),
-    )
+        ],
+    ]
 );

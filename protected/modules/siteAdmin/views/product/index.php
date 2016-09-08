@@ -20,11 +20,7 @@ $this->widget(
                     'style' => 'text-align: center; padding: 5px;width:100px;'
                 )
             ),
-            array(
-                'name'  => 'name',
-                'value' => 'CHtml::link($data->name, "/siteAdmin/product/update/" . $data->id)',
-                'type'  => 'raw'
-            ),
+            'name',
             'article',
             array(
                 'name'   => 'category_id',

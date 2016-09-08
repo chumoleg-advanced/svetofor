@@ -1,18 +1,17 @@
 <?php
 $this->widget(
-    'zii.widgets.grid.CGridView', array(
+    'zii.widgets.grid.CGridView', [
         'id'           => 'settings-grid',
         'dataProvider' => $dataProvider,
         'filter'       => $model,
         'ajaxUpdate'   => false,
-
-        'columns'      => array(
+        'columns'      => [
             'id',
-            array(
-                'name'  => 'name',
-                'value' => 'CHtml::link($data->name, "/siteAdmin/settings/update/" . $data->id)',
-                'type'  => 'raw'
-            )
-        )
-    )
+            'name',
+            [
+                'class'    => 'MyButtonColumn',
+                'template' => '{update}',
+            ]
+        ]
+    ]
 );
