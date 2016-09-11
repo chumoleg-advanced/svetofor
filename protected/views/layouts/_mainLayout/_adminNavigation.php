@@ -14,6 +14,9 @@
                         <a href="/siteAdmin/product">Товары</a>
                     </li>
                     <li>
+                        <a href="/siteAdmin/productImage">Изображения для товаров</a>
+                    </li>
+                    <li>
                         <a href="/siteAdmin/category">Категории</a>
                     </li>
                     <li>

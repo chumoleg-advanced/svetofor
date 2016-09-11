@@ -12,4 +12,5 @@ protected/config/*local.php
 images/Product
 images/Category
 images/CarBrand
+images/undistributed
 .tmb

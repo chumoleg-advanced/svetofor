@@ -38,6 +38,10 @@
             </li>
 
             <li class="demo-button">
+                <a href="/site/certificate">Сертификаты</a>
+            </li>
+
+            <li class="demo-button">
                 <a href="/site/delivery">Доставка</a>
             </li>
 

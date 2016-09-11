@@ -770,3 +770,37 @@
     });
 
 })(this.jQuery);
+
+function preLoaderShow() {
+    var bodyH = $(window).height() / 2 - 90;
+    $('body').css('opacity', 0.6);
+    $('#bigPreLoader').css('padding-top', bodyH + 'px').show();
+}
+
+function preLoaderHide() {
+    setTimeout(function () {
+        var obj = $('body #bigPreLoader');
+        obj.fadeOut('slow', function () {
+            obj.hide();
+            $('body').css('opacity', '');
+        });
+    }, 100);
+}
+
+function checkJsonAnswer(data, reload) {
+    if (data && data.status && data.status != 'error') {
+        return true;
+    }
+
+    if (data && data.msg) {
+        alert(data.msg);
+    } else {
+        alert('Ошибка при обработке ответа!!!');
+    }
+
+    if (reload) {
+        window.location.reload();
+    }
+
+    return false;
+}

@@ -1,37 +1,27 @@
 <?php
 
-// This is the configuration for yiic console application.
-// Any writable CConsoleApplication properties can be configured here.
-return array(
+return CMap::mergeArray([
     'basePath'   => dirname(__FILE__) . DIRECTORY_SEPARATOR . '..',
     'name'       => 'My Console Application',
-
-    // preloading 'log' component
-    'preload'    => array('log'),
-
-    'import' => array(
+    'preload'    => ['log'],
+    'import'     => [
         'application.models.*',
         'application.components.*',
         'application.extensions.chosen.*'
-    ),
-
-    // application components
-    'components' => array(
-        'db'  => array(
-            'connectionString' => 'mysql:host=localhost;dbname=svetofor',
-            'emulatePrepare'   => true,
-            'username'         => 'root',
-            'password'         => '',
-            'charset'          => 'utf8',
-        ),
-        'log' => array(
+    ],
+    'components' => [
+        'db'  => [
+            'emulatePrepare' => true,
+            'charset'        => 'utf8',
+        ],
+        'log' => [
             'class'  => 'CLogRouter',
-            'routes' => array(
-                array(
+            'routes' => [
+                [
                     'class'  => 'CFileLogRoute',
                     'levels' => 'error, warning',
-                ),
-            ),
-        ),
-    ),
-);
+                ],
+            ],
+        ],
+    ],
+], require_once('main-local.php'));

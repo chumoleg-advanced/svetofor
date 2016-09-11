@@ -1,12 +1,13 @@
 <script>
-    $(document).ready(function(){
-        $('.deletePrice').click(function(){
-            if (!confirm("Вы уверены, что хотите удалить файл?")){
+    $(document).ready(function () {
+        $('.deleteFile').click(function () {
+            if (!confirm("Вы уверены, что хотите удалить файл?")) {
                 return false;
             }
 
             var file = $(this).attr('fileName');
-            document.location.href = "/siteAdmin/settings/deleteCatalog?file="+file;
+            var folder = $(this).attr('folderName');
+            document.location.href = "/siteAdmin/settings/deleteFile?file=" + file + '&folder=' + folder;
         })
     });
 </script>
@@ -17,14 +18,14 @@
 <?php
 /* @var CActiveForm $form */
 /* @var Settings $model */
-$form = $this->beginWidget('CActiveForm', array(
+$form = $this->beginWidget('CActiveForm', [
     'id'                   => 'settings-form',
     'errorMessageCssClass' => 'text-error',
-    'htmlOptions'          => array(
+    'htmlOptions'          => [
         'enctype' => 'multipart/form-data',
         'class'   => 'add-comment'
-    ),
-));
+    ],
+]);
 ?>
 
 <div class="text-error"><?php echo $form->errorSummary($model); ?></div>
@@ -37,11 +38,17 @@ $form = $this->beginWidget('CActiveForm', array(
         ?>
     </div>
 
-    <?php if ($model->id == 1 || $model->id == 2) : ?>
+    <?php if (in_array($model->id, [Settings::OFFLINE_ORDER, Settings::CATALOGS, Settings::CERTIFICATES])) : ?>
         <?php
-        $folderName = 'catalogs';
-        if ($model->id == 1){
+
+        if ($model->id == Settings::OFFLINE_ORDER) {
             $folderName = 'offline';
+
+        } elseif ($model->id == Settings::CERTIFICATES) {
+            $folderName = 'certificates';
+
+        } else {
+            $folderName = 'catalogs';
         }
 
         echo CHtml::hiddenField('folderName', $folderName);
@@ -53,7 +60,7 @@ $form = $this->beginWidget('CActiveForm', array(
             ?>
         </div>
 
-        <?php $fileList = glob(Yii::app()->basePath . '/data/catalogs/*', GLOB_BRACE); ?>
+        <?php $fileList = glob(Yii::app()->basePath . '/data/' . $folderName . '/*', GLOB_BRACE); ?>
         <table class="cart-table">
             <?php foreach ($fileList as $file) : ?>
                 <?php
@@ -62,16 +69,20 @@ $form = $this->beginWidget('CActiveForm', array(
                 ?>
                 <tr>
                     <td>
-                        <?php echo CHtml::link($file, '/download/catalog?file=' . base64_encode($file)); ?>
+                        <?php echo CHtml::link($file,
+                            '/download/file?file=' . base64_encode($file) . '&folder=' . $folderName); ?>
                     </td>
                     <td>
-                        <?php echo CHtml::link('Удалить', '#',
-                            array('class' => 'deletePrice', 'fileName' => base64_encode($file))); ?>
+                        <?php echo CHtml::link('Удалить', '#', [
+                            'class'      => 'deleteFile',
+                            'fileName'   => base64_encode($file),
+                            'folderName' => $folderName
+                        ]); ?>
                     </td>
                 </tr>
             <?php endforeach; ?>
         </table>
-        <br />
+        <br/>
 
     <?php endif; ?>
 
@@ -79,13 +90,13 @@ $form = $this->beginWidget('CActiveForm', array(
         <div><?php echo $model->getAttributeLabel('text'); ?></div>
         <div>
             <?php
-            $this->widget('application.extensions.ckeditor.CKEditor', array(
+            $this->widget('application.extensions.ckeditor.CKEditor', [
                 'model'          => $model,
                 'attribute'      => 'text',
                 'language'       => 'ru',
                 'editorTemplate' => 'advanced',
                 'resizeEnabled'  => false
-            ));
+            ]);
             ?>
         </div>
     </div>

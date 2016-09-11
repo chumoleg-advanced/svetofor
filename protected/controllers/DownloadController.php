@@ -26,14 +26,15 @@ class DownloadController extends Controller
         readfile($fileFolder);
     }
 
-    public function actionCatalog()
+    public function actionFile()
     {
         if (Yii::app()->user->isGuest) {
             $this->redirect('/');
         }
 
         $file = Yii::app()->request->getParam('file');
-        if (empty($file)) {
+        $folder = Yii::app()->request->getParam('folder');
+        if (empty($file) || empty($folder)) {
             $this->redirect('/');
         }
 
@@ -43,7 +44,7 @@ class DownloadController extends Controller
         $ext = end($tmpExt);
 
         DownloadSend::send($ext, $fileName);
-        $fileFolder = Yii::app()->getBasePath() . '/data/catalogs/' . $file;
+        $fileFolder = Yii::app()->getBasePath() . '/data/' . $folder . '/' . $file;
         readfile($fileFolder);
     }
 }

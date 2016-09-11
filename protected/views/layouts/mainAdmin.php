@@ -64,6 +64,10 @@
 
         <?php echo $content; ?>
         <div class="clearfix">&nbsp;</div>
+
+        <div id="bigPreLoader">
+            <img src="/images/bigPreLoader.gif" alt="Пожалуйста, подождите..."/>
+        </div>
     </div>
 </div>
 </body>

@@ -43,6 +43,12 @@ class SiteController extends Controller
         $this->render('catalog');
     }
 
+    public function actionCertificate()
+    {
+        $this->_hideElements();
+        $this->render('certificate');
+    }
+
     public function actionDelivery()
     {
         $this->_hideElements();

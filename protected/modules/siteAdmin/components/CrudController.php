@@ -1,15 +1,9 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: chumakov.o
- * Date: 31.03.14
- *
- */
 
 class CrudController extends CController
 {
     public $layout = '//layouts/mainAdmin';
-    public $breadcrumbs = array();
+    public $breadcrumbs = [];
     public $showHeader = false;
 
     /**
@@ -20,11 +14,11 @@ class CrudController extends CController
 
     public function init()
     {
-        if (!Yii::app()->user->isAdmin){
+        if (!Yii::app()->user->isAdmin) {
             $this->redirect('/');
         }
 
-        if (empty($this->model)){
+        if (empty($this->model)) {
             return;
         }
 
@@ -34,24 +28,24 @@ class CrudController extends CController
 
     public function filters()
     {
-        return array(
+        return [
             'accessControl'
-        );
+        ];
     }
 
     public function accessRules()
     {
-        return array(
-            array(
+        return [
+            [
                 'allow',
-                'actions' => array('index', 'create', 'update', 'delete'),
-                'roles'   => array(User::ADMIN),
-            ),
-            array(
+                'actions' => ['index', 'create', 'update', 'delete'],
+                'roles'   => [User::ADMIN],
+            ],
+            [
                 'deny',
-                'roles' => array('guest'),
-            ),
-        );
+                'roles' => ['guest'],
+            ],
+        ];
     }
 
     public function actionCreate()
@@ -69,7 +63,7 @@ class CrudController extends CController
 
         $this->model->attributes = $_POST[$this->modelName];
         if ($this->model->save()) {
-            if ($withPicture){
+            if ($withPicture) {
                 $this->_savePicture();
             }
 
@@ -79,9 +73,9 @@ class CrudController extends CController
 
     protected function _renderForm()
     {
-        $this->render('form', array(
+        $this->render('form', [
             'model' => $this->model,
-        ));
+        ]);
     }
 
     public function actionUpdate($id)
@@ -121,10 +115,10 @@ class CrudController extends CController
             $model->attributes = $_GET[$this->modelName];
         }
 
-        $this->render('index', array(
+        $this->render('index', [
             'model'        => $model,
             'dataProvider' => $model->search()
-        ));
+        ]);
     }
 
     protected function _savePicture()

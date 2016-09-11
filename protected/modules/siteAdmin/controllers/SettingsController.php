@@ -41,14 +41,15 @@ class SettingsController extends CrudController
         }
     }
 
-    public function actionDeleteCatalog()
+    public function actionDeleteFile()
     {
         $file = Yii::app()->request->getParam('file');
-        if (empty($file)) {
-            $this->redirect('/siteAdmin/settings/update/2');
+        $folder = Yii::app()->request->getParam('folder');
+        if (empty($file) || empty($folder)) {
+            $this->redirect('/siteAdmin/settings/index');
         }
 
-        unlink(Yii::app()->getBasePath() . '/data/catalogs/' . base64_decode($file));
-        $this->redirect('/siteAdmin/settings/update/2');
+        unlink(Yii::app()->getBasePath() . '/data/' . $folder . '/' . base64_decode($file));
+        $this->redirect('/siteAdmin/settings/index');
     }
 }
