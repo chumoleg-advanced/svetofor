@@ -5,6 +5,9 @@ assets/*
 protected/runtime/*
 !protected/runtime/.gitignore
 protected/data/*.db
+protected/data/catalogs
+protected/data/certificates
+protected/data/offline
 themes/classic/views/
 
 protected/config/*local.php
